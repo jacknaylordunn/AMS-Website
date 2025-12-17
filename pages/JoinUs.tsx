@@ -4,6 +4,7 @@ import Button from '../components/Button';
 
 const JoinUs: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
   const [formData, setFormData] = useState({
       firstName: '',
       lastName: '',
@@ -17,24 +18,20 @@ const JoinUs: React.FC = () => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    
-    const subject = `Job Application: ${formData.role} - ${formData.firstName} ${formData.lastName}`;
-    const body = `Application Details:
+    const form = e.currentTarget;
+    const bodyFormData = new FormData(form);
 
-Name: ${formData.firstName} ${formData.lastName}
-Email: ${formData.email}
-Role: ${formData.role}
-PIN (if applicable): ${formData.pin}
-
-Experience / Cover Letter:
-${formData.coverLetter}
-
-IMPORTANT: Please attach your CV to this email before sending.`;
-
-    window.location.href = `mailto:contact@aegismedicalsolutions.co.uk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setSubmitted(true);
+    fetch('/', {
+        method: 'POST',
+        body: bodyFormData // Note: Content-Type is NOT set for file uploads, browser handles it
+    })
+      .then(() => setSubmitted(true))
+      .catch((error) => {
+        console.error(error);
+        setError(true);
+      });
   };
 
   const vacancies = [
@@ -125,14 +122,27 @@ IMPORTANT: Please attach your CV to this email before sending.`;
                         <div className="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-aegis-teal/20 mb-6">
                             <Briefcase className="h-10 w-10 text-aegis-teal" />
                         </div>
-                        <h2 className="text-2xl font-bold text-aegis-navy mb-4">Email Drafted</h2>
+                        <h2 className="text-2xl font-bold text-aegis-navy mb-4">Application Received</h2>
                         <p className="text-slate-600 mb-8">
-                            We have opened your email client with your application details. <strong>Please attach your CV</strong> to the email before sending it to us.
+                            We have received your details and CV. Our recruitment team will review your application and be in touch soon.
                         </p>
-                        <Button onClick={() => setSubmitted(false)} variant="outline">Start Over</Button>
+                        <Button onClick={() => setSubmitted(false)} variant="outline">Back to Careers</Button>
                     </div>
                 ) : (
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form 
+                        name="join-us" 
+                        method="post" 
+                        data-netlify="true" 
+                        data-netlify-honeypot="bot-field"
+                        encType="multipart/form-data"
+                        onSubmit={handleSubmit} 
+                        className="space-y-6"
+                    >
+                        <input type="hidden" name="form-name" value="join-us" />
+                        <p className="hidden">
+                            <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
+                        </p>
+
                         <div className="border-b border-slate-100 pb-6 mb-6">
                             <h3 className="text-2xl font-bold text-aegis-navy">Staff Application</h3>
                             <p className="text-slate-500 text-sm mt-1">Apply for any of the positions listed.</p>
@@ -173,7 +183,10 @@ IMPORTANT: Please attach your CV to this email before sending.`;
 
                         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800 flex items-start">
                             <Upload className="w-5 h-5 mr-2 flex-shrink-0" />
-                            <p><strong>Note:</strong> You will be prompted to attach your CV in your email client after clicking submit.</p>
+                            <div>
+                                <p className="font-bold mb-1">Upload CV / Portfolio</p>
+                                <input type="file" name="cv" className="block w-full text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-aegis-blue file:text-white hover:file:bg-blue-700" />
+                            </div>
                         </div>
 
                         <div>
@@ -181,8 +194,10 @@ IMPORTANT: Please attach your CV to this email before sending.`;
                             <textarea name="coverLetter" onChange={handleChange} value={formData.coverLetter} rows={3} className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:ring-2 focus:ring-aegis-teal transition"></textarea>
                         </div>
 
+                        {error && <p className="text-red-500 text-sm">Failed to submit application. Please try again.</p>}
+
                         <Button type="submit" variant="primary" size="lg" className="w-full">
-                            Draft Application Email
+                            Submit Application
                         </Button>
                     </form>
                 )}
