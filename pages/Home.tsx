@@ -177,27 +177,17 @@ const Home: React.FC = () => {
             </div>
 
             {/* Visual Representation */}
-            <div className="relative hidden lg:block">
-              <div className="relative z-10 bg-slate-800 rounded-2xl border border-slate-700 shadow-2xl overflow-hidden transform rotate-2 hover:rotate-0 transition-transform duration-500 max-w-md mx-auto">
-                 {/* Mock Browser/App Interface Header */}
-                 <div className="bg-slate-900 p-4 flex items-center gap-2 border-b border-slate-700">
-                    <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                    <div className="ml-4 bg-slate-800 rounded-md px-3 py-1 text-xs text-slate-400 flex-1 text-center font-mono truncate">
-                        https://eresus.app
-                    </div>
-                 </div>
-                 {/* Mock Content */}
-                 <div className="p-12 bg-slate-800 flex flex-col items-center justify-center min-h-[350px] text-center relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-b from-blue-500/10 to-transparent"></div>
-                    <Smartphone className="w-24 h-24 text-blue-500 mb-6 opacity-90 relative z-10" />
-                    <h4 className="text-3xl font-bold text-white mb-2 relative z-10">eResus</h4>
-                    <p className="text-slate-400 max-w-xs relative z-10">The Digital Resuscitation Aide</p>
-                    
-                    {/* Floating UI Elements (Decorative) */}
-                    <div className="absolute top-20 right-10 w-16 h-16 bg-purple-500/20 rounded-lg blur-xl animate-pulse"></div>
-                    <div className="absolute bottom-20 left-10 w-20 h-20 bg-blue-500/20 rounded-full blur-xl animate-pulse delay-700"></div>
+            <div className="relative hidden lg:block flex justify-center">
+              <div className="relative z-10 transform rotate-2 hover:rotate-0 transition-transform duration-500 max-w-sm mx-auto">
+                 {/* App Image Container */}
+                 <div className="relative rounded-[2rem] border-8 border-slate-900 bg-slate-900 shadow-2xl overflow-hidden">
+                    <img 
+                        src="https://145955222.fs1.hubspotusercontent-eu1.net/hubfs/145955222/AMS/Tech/1.png" 
+                        alt="eResus App Interface" 
+                        className="w-full h-auto object-cover opacity-95 hover:opacity-100 transition-opacity"
+                    />
+                    {/* Gloss Overlay */}
+                    <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none"></div>
                  </div>
               </div>
               {/* Decorative background glows */}
