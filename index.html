@@ -3,40 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    
-    <!-- Primary Meta Tags -->
     <title>Aegis Medical Solutions | Professional Event Medical Cover</title>
-    <meta name="title" content="Aegis Medical Solutions | Professional Event Medical Cover">
-    <meta name="description" content="Oxford-based specialists in pre-hospital care. We provide Clinical Governance, registered professionals, and logistical support for events across the UK.">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="https://145955222.fs1.hubspotusercontent-eu1.net/hubfs/145955222/AMS/Logo%20FINAL%20(2).png">
-    <link rel="apple-touch-icon" href="https://145955222.fs1.hubspotusercontent-eu1.net/hubfs/145955222/AMS/Logo%20FINAL%20(2).png">
-
-    <!-- Open Graph / Facebook / LinkedIn -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://www.aegismedicalsolutions.co.uk/">
-    <meta property="og:title" content="Aegis Medical Solutions | Professional Event Medical Cover">
-    <meta property="og:description" content="Oxford-based specialists in pre-hospital care. We provide Clinical Governance, registered professionals, and logistical support for events across the UK.">
-    <meta property="og:image" content="https://145955222.fs1.hubspotusercontent-eu1.net/hubfs/145955222/AMS/Logo%20FINAL%20(2).png">
-
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://www.aegismedicalsolutions.co.uk/">
-    <meta property="twitter:title" content="Aegis Medical Solutions | Professional Event Medical Cover">
-    <meta property="twitter:description" content="Oxford-based specialists in pre-hospital care. We provide Clinical Governance, registered professionals, and logistical support for events across the UK.">
-    <meta property="twitter:image" content="https://145955222.fs1.hubspotusercontent-eu1.net/hubfs/145955222/AMS/Logo%20FINAL%20(2).png">
-
-    <!-- Google Analytics (GA4) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WMG49RQM56"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'G-WMG49RQM56');
-    </script>
-
+    <link rel="icon" type="image/png" href="https://145955222.fs1.hubspotusercontent-eu1.net/hubfs/145955222/AMS/Logo%20FINAL%20(2).png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
@@ -50,12 +18,12 @@
             },
             colors: {
               aegis: {
-                navy: '#0f172a', 
-                dark: '#020617', 
-                blue: '#1e40af', 
-                teal: '#0d9488', 
-                light: '#f8fafc', 
-                gray: '#cbd5e1', 
+                navy: '#0f172a', // Slate 900 - Primary Background/Text
+                dark: '#020617', // Slate 950
+                blue: '#1e40af', // Blue 800 - Primary Action
+                teal: '#0d9488', // Teal 600 - Secondary/Brand
+                light: '#f8fafc', // Slate 50
+                gray: '#cbd5e1', // Slate 300
               }
             },
             animation: {
@@ -102,45 +70,5 @@
   <body class="bg-slate-50 text-slate-800 antialiased selection:bg-aegis-teal selection:text-white">
     <div id="root"></div>
     <script type="module" src="/index.tsx"></script>
-
-    <!-- 
-      NETLIFY FORM DEFINITIONS
-      These hidden forms are required for Netlify to detect your forms at build time.
-    -->
-    
-    <!-- Contact Form -->
-    <form name="contact" netlify netlify-honeypot="bot-field" hidden>
-      <input type="text" name="name" />
-      <input type="tel" name="phone" />
-      <input type="email" name="email" />
-      <select name="serviceType"></select>
-      <textarea name="message"></textarea>
-    </form>
-
-    <!-- Quote Form -->
-    <form name="quote" netlify netlify-honeypot="bot-field" hidden>
-      <input type="text" name="fullName" />
-      <input type="text" name="organization" />
-      <input type="email" name="email" />
-      <input type="tel" name="phone" />
-      <input type="text" name="eventDate" />
-      <input type="text" name="duration" />
-      <input type="text" name="location" />
-      <input type="number" name="attendees" />
-      <select name="eventType"></select>
-      <textarea name="requirements"></textarea>
-    </form>
-
-    <!-- Join Us Form (with File Upload) -->
-    <form name="join-us" netlify netlify-honeypot="bot-field" enctype="multipart/form-data" hidden>
-      <input type="text" name="firstName" />
-      <input type="text" name="lastName" />
-      <input type="email" name="email" />
-      <select name="role"></select>
-      <input type="text" name="pin" />
-      <textarea name="coverLetter"></textarea>
-      <input type="file" name="cv" />
-    </form>
-
   </body>
 </html>

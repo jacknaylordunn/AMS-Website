@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Shield, Music, Trophy, Moon, Film, CheckCircle, ArrowRight, Star, Smartphone, Cpu, Apple, Globe } from 'lucide-react';
+import { Shield, Music, Trophy, Moon, Film, CheckCircle, ArrowRight, Star } from 'lucide-react';
 import Button from '../components/Button';
 import { COMPANY_INFO, IMAGES } from '../constants';
 
@@ -107,93 +107,6 @@ const Home: React.FC = () => {
                 </div>
               </Link>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* NEW: Aegis Tech Branch Section */}
-      <section className="py-24 bg-slate-900 text-white relative overflow-hidden border-t border-slate-800">
-        {/* Abstract Tech Background */}
-        <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/circuit-board.png')] opacity-5"></div>
-        <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-blue-900/30 to-purple-900/30"></div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
-              <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-500/10 border border-blue-400/30 text-blue-300 text-xs font-bold uppercase tracking-wider mb-6">
-                <Cpu className="w-3 h-3" /> Aegis Tech Division
-              </div>
-              <h2 className="text-3xl md:text-5xl font-heading font-bold mb-6">
-                Digital Tools for <br/>
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400">Modern Clinicians</span>
-              </h2>
-              <p className="text-lg text-slate-300 mb-8 leading-relaxed">
-                We don't just provide physical cover; we build the tools that improve patient outcomes. Our dedicated tech division develops cutting-edge software for the pre-hospital environment.
-              </p>
-              
-              {/* eResus Featured Card */}
-              <div className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 sm:p-8 mb-8 hover:bg-white/10 transition-colors">
-                <div className="flex items-start gap-4">
-                  <div className="bg-gradient-to-br from-blue-600 to-purple-600 p-3 rounded-xl shadow-lg shadow-blue-900/50 flex-shrink-0">
-                    <Smartphone className="w-8 h-8 text-white" />
-                  </div>
-                  <div>
-                    <h3 className="text-xl font-bold text-white mb-2">Featured App: eResus</h3>
-                    <p className="text-slate-400 text-sm mb-4">
-                      The essential digital aide for resuscitation and critical care. Features real-time algorithms, drug calculators, and team management tools.
-                    </p>
-                    <div className="flex flex-wrap gap-3">
-                      <a 
-                        href="https://eresus.app" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white text-sm font-semibold rounded-lg transition-colors shadow-sm"
-                      >
-                        <Globe className="w-4 h-4 mr-2" /> Web App
-                      </a>
-                      <a 
-                        href="https://apps.apple.com/gb/app/eresus/id6753123316" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center px-4 py-2 bg-white text-slate-900 hover:bg-slate-100 text-sm font-semibold rounded-lg transition-colors shadow-sm"
-                      >
-                        <Apple className="w-4 h-4 mr-2" /> iOS Store
-                      </a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div className="flex flex-wrap gap-4">
-                <a 
-                  href="https://tech.aegismedicalsolutions.co.uk" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  className="px-8 py-4 border border-slate-600 hover:border-blue-400 text-slate-300 hover:text-white font-heading font-semibold rounded-md transition-all hover:-translate-y-0.5"
-                >
-                  Visit Aegis Tech Division
-                </a>
-              </div>
-            </div>
-
-            {/* Visual Representation */}
-            <div className="relative hidden lg:block flex justify-center">
-              <div className="relative z-10 transform rotate-2 hover:rotate-0 transition-transform duration-500 max-w-sm mx-auto">
-                 {/* App Image Container */}
-                 <div className="relative rounded-[2rem] border-8 border-slate-900 bg-slate-900 shadow-2xl overflow-hidden">
-                    <img 
-                        src="https://145955222.fs1.hubspotusercontent-eu1.net/hubfs/145955222/AMS/Tech/1.png" 
-                        alt="eResus App Interface" 
-                        className="w-full h-auto object-cover opacity-95 hover:opacity-100 transition-opacity"
-                    />
-                    {/* Gloss Overlay */}
-                    <div className="absolute inset-0 bg-gradient-to-tr from-white/5 to-transparent pointer-events-none"></div>
-                 </div>
-              </div>
-              {/* Decorative background glows */}
-              <div className="absolute -top-10 -right-10 w-72 h-72 bg-purple-600/20 rounded-full blur-3xl -z-10"></div>
-              <div className="absolute -bottom-10 -left-10 w-72 h-72 bg-blue-600/20 rounded-full blur-3xl -z-10"></div>
-            </div>
           </div>
         </div>
       </section>

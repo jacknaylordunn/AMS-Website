@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
@@ -12,6 +12,7 @@ import GetQuote from './pages/GetQuote';
 import JoinUs from './pages/JoinUs';
 import InvoicingTerms from './pages/InvoicingTerms';
 import PrivacyPolicy from './pages/PrivacyPolicy';
+import NotFound from './pages/NotFound';
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -41,6 +42,8 @@ const App: React.FC = () => {
             <Route path="/join-us" element={<JoinUs />} />
             <Route path="/invoicing-terms" element={<InvoicingTerms />} />
             <Route path="/privacy" element={<PrivacyPolicy />} />
+            {/* Catch-all route for 404 Not Found */}
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
         <Footer />

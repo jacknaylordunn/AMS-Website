@@ -5,7 +5,6 @@ import Button from '../components/Button';
 
 const GetQuote: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState(false);
   const location = useLocation();
   const [formData, setFormData] = useState({
       fullName: '',
@@ -38,21 +37,30 @@ const GetQuote: React.FC = () => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const form = e.currentTarget;
-    const bodyFormData = new FormData(form);
+    
+    const subject = `Quote Request: ${formData.eventType} - ${formData.organization || formData.fullName}`;
+    const body = `Quote Request Details:
 
-    fetch('/', {
-        method: 'POST',
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams(bodyFormData as any).toString()
-    })
-      .then(() => setSubmitted(true))
-      .catch((error) => {
-        console.error(error);
-        setError(true);
-      });
+--- Personal Details ---
+Name: ${formData.fullName}
+Organization: ${formData.organization}
+Email: ${formData.email}
+Phone: ${formData.phone}
+
+--- Event Details ---
+Event Type: ${formData.eventType}
+Date(s): ${formData.eventDate}
+Duration: ${formData.duration}
+Location: ${formData.location}
+Attendees: ${formData.attendees}
+
+--- Requirements ---
+${formData.requirements}`;
+
+    window.location.href = `mailto:contact@aegismedicalsolutions.co.uk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setSubmitted(true);
   };
 
   return (
@@ -73,26 +81,14 @@ const GetQuote: React.FC = () => {
                <div className="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-green-100 mb-6">
                   <Send className="h-10 w-10 text-green-600" />
                 </div>
-                <h2 className="text-3xl font-bold text-aegis-navy mb-4">Request Received</h2>
+                <h2 className="text-3xl font-bold text-aegis-navy mb-4">Draft Email Created</h2>
                 <p className="text-slate-600 text-lg mb-8">
-                    Thank you for your enquiry. Our planning team will review your requirements and contact you shortly with a proposal.
+                    We have opened your default email client with your quote details pre-filled. Please click 'Send' in your email app to complete the request.
                 </p>
                 <Button to="/" variant="outline">Return Home</Button>
             </div>
           ) : (
-            <form 
-              name="quote" 
-              method="post" 
-              data-netlify="true" 
-              data-netlify-honeypot="bot-field"
-              onSubmit={handleSubmit} 
-              className="space-y-8"
-            >
-              <input type="hidden" name="form-name" value="quote" />
-              <p className="hidden">
-                <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
-              </p>
-
+            <form onSubmit={handleSubmit} className="space-y-8">
               {/* Contact Details */}
               <div className="space-y-4">
                 <h3 className="text-xl font-bold text-aegis-navy border-b border-slate-100 pb-2">Your Details</h3>
@@ -178,10 +174,8 @@ const GetQuote: React.FC = () => {
                 </div>
               </div>
 
-              {error && <p className="text-red-500 text-sm">There was a problem submitting your request. Please try again.</p>}
-
               <Button type="submit" variant="primary" size="lg" className="w-full">
-                Submit Quote Request
+                Generate Email Quote Request
               </Button>
             </form>
           )}

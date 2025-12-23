@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Send, FileText, Clock, ChevronRight } from 'lucide-react';
+import { Phone, Mail, MapPin, Send, MessageSquare, Clock, FileText, ChevronRight } from 'lucide-react';
 import Button from '../components/Button';
 import { Link } from 'react-router-dom';
 import { COMPANY_INFO } from '../constants';
@@ -13,27 +13,26 @@ const Contact: React.FC = () => {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    const form = e.currentTarget;
-    const formData = new FormData(form);
+    
+    const subject = `New Inquiry: ${formState.serviceType} - ${formState.name}`;
+    const body = `Name: ${formState.name}
+Email: ${formState.email}
+Phone: ${formState.phone}
+Service Type: ${formState.serviceType}
 
-    fetch('/', {
-      method: 'POST',
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(formData as any).toString()
-    })
-      .then(() => setSubmitted(true))
-      .catch((error) => {
-        console.error(error);
-        setError(true);
-      });
+Message:
+${formState.message}`;
+
+    window.location.href = `mailto:contact@aegismedicalsolutions.co.uk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+    setSubmitted(true);
   };
 
   return (
@@ -147,32 +146,19 @@ const Contact: React.FC = () => {
                   <div className="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-green-100 mb-6 animate-bounce">
                     <Send className="h-8 w-8 text-green-600" />
                   </div>
-                  <h3 className="text-2xl font-bold text-aegis-navy">Message Sent!</h3>
+                  <h3 className="text-2xl font-bold text-aegis-navy">Email Generated!</h3>
                   <p className="mt-3 text-slate-500 max-w-md mx-auto">
-                    Thank you for contacting us. A member of our team will be in touch shortly.
+                    Please check your email client (Outlook, Mail, Gmail) to send the drafted message.
                   </p>
-                  <Button 
+                  <button 
                     onClick={() => setSubmitted(false)}
-                    variant="outline"
-                    className="mt-8"
+                    className="mt-8 text-aegis-teal font-semibold hover:text-aegis-navy transition-colors underline"
                   >
                     Send another message
-                  </Button>
+                  </button>
                 </div>
               ) : (
-                <form 
-                  name="contact" 
-                  method="post" 
-                  data-netlify="true" 
-                  data-netlify-honeypot="bot-field"
-                  onSubmit={handleSubmit} 
-                  className="space-y-6"
-                >
-                  <input type="hidden" name="form-name" value="contact" />
-                  <p className="hidden">
-                    <label>Don’t fill this out if you're human: <input name="bot-field" /></label>
-                  </p>
-
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="name" className="block text-sm font-bold text-aegis-navy mb-2">Full Name <span className="text-red-500">*</span></label>
@@ -250,10 +236,8 @@ const Contact: React.FC = () => {
                     ></textarea>
                   </div>
 
-                  {error && <p className="text-red-500 text-sm">Something went wrong. Please try again.</p>}
-
                   <Button type="submit" variant="primary" size="lg" className="w-full">
-                    Send Message
+                    Open Email Client
                   </Button>
                 </form>
               )}
