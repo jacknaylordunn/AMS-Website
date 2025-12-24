@@ -1,5 +1,5 @@
 import React from 'react';
-import { Shield, MapPin, Calendar, UserCheck, HeartHandshake } from 'lucide-react';
+import { Shield, MapPin, Calendar, Linkedin } from 'lucide-react';
 import { IMAGES, COMPANY_INFO } from '../constants';
 
 const About: React.FC = () => {
@@ -18,50 +18,7 @@ const About: React.FC = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         
-        {/* Leadership Section */}
-        <div className="bg-white rounded-xl shadow-lg border border-slate-100 overflow-hidden mb-20">
-            <div className="flex flex-col md:flex-row">
-                <div className="md:w-5/12">
-                    <img 
-                        src={IMAGES.founder} 
-                        alt="Jack Naylor Dunn" 
-                        className="w-full h-full object-cover min-h-[400px]"
-                    />
-                </div>
-                <div className="md:w-7/12 p-8 md:p-12 flex flex-col justify-center">
-                    <div className="mb-6">
-                        <span className="text-aegis-teal font-bold uppercase tracking-wider text-xs mb-2 block">Leadership</span>
-                        <h3 className="text-3xl md:text-4xl font-heading font-bold text-aegis-navy mb-2">Jack Naylor Dunn</h3>
-                        <p className="text-slate-500 font-medium text-lg">Founder & Managing Director</p>
-                    </div>
-                    
-                    <div className="space-y-6 text-slate-600 leading-relaxed text-lg font-light mb-8">
-                        <p>
-                            Jack's journey in pre-hospital care is defined by dedication and early capability. Working in the sector since the age of sixteen, he has built a reputation for clinical excellence and operational reliability.
-                        </p>
-                        <p>
-                            Currently a <strong>Student Paramedic with the South Central Ambulance Service</strong>, Jack brings the rigour of NHS frontline experience to the private events sector. 
-                        </p>
-                        <p>
-                            He founded Aegis Medical Solutions in February 2025 with a clear vision: to professionalise event medical cover by deploying qualified staff who adhere to the highest clinical governance standards.
-                        </p>
-                    </div>
-                    
-                    <div className="flex items-center gap-6 pt-6 border-t border-slate-100">
-                         <div className="flex items-center gap-2">
-                             <UserCheck className="w-5 h-5 text-aegis-teal" />
-                             <span className="text-sm font-semibold text-aegis-navy">NHS Experience</span>
-                         </div>
-                         <div className="flex items-center gap-2">
-                             <HeartHandshake className="w-5 h-5 text-aegis-teal" />
-                             <span className="text-sm font-semibold text-aegis-navy">Patient Focused</span>
-                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        {/* The Philosophy */}
+        {/* The Philosophy - Moved to top */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 mb-20 items-start">
           <div>
             <span className="text-aegis-teal font-bold uppercase tracking-wider mb-2 block text-xs">The Brand</span>
@@ -111,6 +68,50 @@ const About: React.FC = () => {
               </li>
             </ul>
           </div>
+        </div>
+
+        {/* Leadership Section - Moved here */}
+        <div className="bg-white rounded-xl shadow-lg border border-slate-100 overflow-hidden mb-20">
+            <div className="flex flex-col md:flex-row">
+                <div className="md:w-5/12">
+                    <img 
+                        src={IMAGES.founder} 
+                        alt="Jack Naylor Dunn" 
+                        className="w-full h-full object-cover min-h-[400px]"
+                    />
+                </div>
+                <div className="md:w-7/12 p-8 md:p-12 flex flex-col justify-center">
+                    <div className="mb-6">
+                        <span className="text-aegis-teal font-bold uppercase tracking-wider text-xs mb-2 block">Leadership</span>
+                        <h3 className="text-3xl md:text-4xl font-heading font-bold text-aegis-navy mb-2">Jack Naylor Dunn</h3>
+                        <p className="text-slate-500 font-medium text-lg">Founder & Managing Director</p>
+                    </div>
+                    
+                    <div className="space-y-6 text-slate-600 leading-relaxed text-lg font-light mb-8">
+                        <p>
+                            Jack's journey in pre-hospital care is defined by dedication and early capability. Working in the sector since the age of sixteen, he has built a reputation for clinical excellence and operational reliability.
+                        </p>
+                        <p>
+                            Currently a <strong>Student Paramedic with the South Central Ambulance Service</strong>, Jack brings the rigour of NHS frontline experience to the private events sector. 
+                        </p>
+                        <p>
+                            He founded Aegis Medical Solutions in February 2025 with a clear vision: to professionalise event medical cover by deploying qualified staff who adhere to the highest clinical governance standards.
+                        </p>
+                    </div>
+                    
+                    <div className="flex items-center pt-6 border-t border-slate-100">
+                         <a 
+                           href="https://www.linkedin.com/in/jacknaylordunn/" 
+                           target="_blank" 
+                           rel="noreferrer"
+                           className="inline-flex items-center justify-center font-heading font-semibold rounded-md transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2 px-6 py-3 text-base border border-transparent text-white bg-[#0077b5] hover:bg-[#006396] shadow-md hover:shadow-lg hover:-translate-y-0.5"
+                         >
+                             <Linkedin className="w-5 h-5 mr-2" />
+                             Connect on LinkedIn
+                         </a>
+                    </div>
+                </div>
+            </div>
         </div>
 
         {/* Gallery Grid */}

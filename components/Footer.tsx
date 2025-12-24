@@ -53,7 +53,6 @@ const Footer: React.FC = () => {
               <li><Link to="/services" className="text-slate-300 hover:text-white transition-colors text-sm">Services</Link></li>
               <li><Link to="/guide" className="text-slate-300 hover:text-white transition-colors text-sm">Medical Guide</Link></li>
               <li><Link to="/contact" className="text-slate-300 hover:text-white transition-colors text-sm">Contact</Link></li>
-              <li><Link to="/invoicing-terms" className="text-slate-300 hover:text-white transition-colors text-sm">Invoicing Terms</Link></li>
             </ul>
           </div>
 
@@ -103,10 +102,12 @@ const Footer: React.FC = () => {
 
         <div className="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center text-xs text-slate-500">
           <p>&copy; {currentYear} {COMPANY_INFO.name}. All rights reserved.</p>
-          <div className="flex gap-4 mt-2 md:mt-0">
+          <div className="flex gap-4 mt-2 md:mt-0 items-center">
              <span>Company No: {COMPANY_INFO.companyNumber}</span>
              <span className="hidden md:inline">&bull;</span>
              <Link to="/privacy" className="hover:text-slate-300">Privacy Policy</Link>
+             <span>&bull;</span>
+             <Link to="/invoicing-terms" className="hover:text-slate-300">Invoicing Terms</Link>
           </div>
         </div>
       </div>
