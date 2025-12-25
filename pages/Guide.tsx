@@ -161,7 +161,7 @@ const Guide: React.FC = () => {
   };
 
   return (
-    <div className="pt-20 min-h-screen bg-slate-50 text-slate-800 font-sans">
+    <div className="min-h-screen bg-slate-50 text-slate-800 font-sans">
         {/* Hero Header */}
         <header className="bg-aegis-navy text-white py-24 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-full h-full bg-[url('https://www.transparenttextures.com/patterns/carbon-fibre.png')] opacity-10"></div>

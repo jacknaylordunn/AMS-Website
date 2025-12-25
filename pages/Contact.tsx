@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Phone, Mail, MapPin, Send, MessageSquare, Clock, FileText, ChevronRight } from 'lucide-react';
+import { Phone, Mail, MapPin, Clock, FileText, ChevronRight, CheckCircle } from 'lucide-react';
 import Button from '../components/Button';
 import { Link } from 'react-router-dom';
 import { COMPANY_INFO } from '../constants';
@@ -13,30 +13,34 @@ const Contact: React.FC = () => {
     message: ''
   });
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormState({ ...formState, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
     
-    const subject = `New Inquiry: ${formState.serviceType} - ${formState.name}`;
-    const body = `Name: ${formState.name}
-Email: ${formState.email}
-Phone: ${formState.phone}
-Service Type: ${formState.serviceType}
-
-Message:
-${formState.message}`;
-
-    window.location.href = `mailto:contact@aegismedicalsolutions.co.uk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
-    setSubmitted(true);
+    try {
+        const formData = new FormData(e.target as HTMLFormElement);
+        
+        await fetch('/', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: new URLSearchParams(formData as any).toString(),
+        });
+        
+        setSubmitted(true);
+    } catch (err) {
+        setError('Something went wrong. Please try again later or contact us via phone.');
+        console.error('Form submission error:', err);
+    }
   };
 
   return (
-    <div className="pt-16 min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50">
       {/* Header */}
       <div className="bg-aegis-navy py-20 text-center text-white">
         <div className="max-w-4xl mx-auto px-4">
@@ -142,23 +146,32 @@ ${formState.message}`;
               </div>
               
               {submitted ? (
-                <div className="text-center py-24 bg-slate-50 rounded-xl border border-dashed border-slate-300">
-                  <div className="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-green-100 mb-6 animate-bounce">
-                    <Send className="h-8 w-8 text-green-600" />
+                <div className="text-center py-20 px-8 bg-white rounded-2xl border border-slate-100 animate-fade-in">
+                  <div className="mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-green-50 mb-6 animate-fade-in-up">
+                    <CheckCircle className="h-12 w-12 text-green-500" />
                   </div>
-                  <h3 className="text-2xl font-bold text-aegis-navy">Email Generated!</h3>
-                  <p className="mt-3 text-slate-500 max-w-md mx-auto">
-                    Please check your email client (Outlook, Mail, Gmail) to send the drafted message.
+                  <h3 className="text-3xl font-heading font-bold text-aegis-navy mb-4">Message Sent</h3>
+                  <p className="text-slate-600 text-lg mb-8 max-w-md mx-auto leading-relaxed">
+                    Thank you for reaching out. A member of our team will review your enquiry and get back to you shortly.
                   </p>
-                  <button 
-                    onClick={() => setSubmitted(false)}
-                    className="mt-8 text-aegis-teal font-semibold hover:text-aegis-navy transition-colors underline"
-                  >
-                    Send another message
-                  </button>
+                  <Button to="/" variant="outline" className="min-w-[200px]">
+                     Return Home
+                  </Button>
                 </div>
               ) : (
-                <form onSubmit={handleSubmit} className="space-y-6">
+                <form 
+                    name="contact" 
+                    method="POST" 
+                    data-netlify="true" 
+                    netlify-honeypot="bot-field"
+                    onSubmit={handleSubmit} 
+                    className="space-y-6"
+                >
+                  <input type="hidden" name="form-name" value="contact" />
+                  <div className="hidden">
+                     <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+                  </div>
+
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
                       <label htmlFor="name" className="block text-sm font-bold text-aegis-navy mb-2">Full Name <span className="text-red-500">*</span></label>
@@ -236,8 +249,10 @@ ${formState.message}`;
                     ></textarea>
                   </div>
 
+                  {error && <p className="text-red-500 text-sm font-bold">{error}</p>}
+
                   <Button type="submit" variant="primary" size="lg" className="w-full">
-                    Open Email Client
+                    Send Message
                   </Button>
                 </form>
               )}

@@ -39,7 +39,7 @@ const Home: React.FC = () => {
             
             <div className="flex flex-col sm:flex-row gap-5">
               <Button to="/get-quote" variant="secondary" size="lg" className="px-10 shadow-xl shadow-aegis-teal/20">
-                Request a Proposal
+                Request a Quote
               </Button>
               <Button to="/services" variant="outline" size="lg" className="px-10 border-slate-400 text-slate-100 hover:bg-white hover:text-aegis-navy hover:border-white">
                 Our Capabilities
@@ -112,12 +112,12 @@ const Home: React.FC = () => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { title: 'Festival & Music', icon: Music, img: IMAGES.services.festival, desc: 'Field hospitals, extraction teams, and crowd welfare.' },
-              { title: 'Sporting Events', icon: Trophy, img: IMAGES.services.sport, desc: 'Pitch-side trauma care and athlete welfare.' },
-              { title: 'Nightlife Venues', icon: Moon, img: IMAGES.services.nightclub, desc: 'On-site medic teams to reduce ambulance call-outs.' },
-              { title: 'Film & TV', icon: Film, img: IMAGES.services.film, desc: 'Discreet unit medics for cast and crew safety.' },
+              { id: 'festival', title: 'Festival & Music', icon: Music, img: IMAGES.services.festival, desc: 'Field hospitals, extraction teams, and crowd welfare.' },
+              { id: 'sport', title: 'Sporting Events', icon: Trophy, img: IMAGES.services.sport, desc: 'Pitch-side trauma care and athlete welfare.' },
+              { id: 'nightclub', title: 'Nightlife Venues', icon: Moon, img: IMAGES.services.nightclub, desc: 'On-site medic teams to reduce ambulance call-outs.' },
+              { id: 'film', title: 'Film & TV', icon: Film, img: IMAGES.services.film, desc: 'Discreet unit medics for cast and crew safety.' },
             ].map((service, index) => (
-              <Link to="/services" key={index} className="group relative h-96 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
+              <Link to={`/services#${service.id}`} key={index} className="group relative h-96 rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500">
                 <img 
                     src={service.img} 
                     alt={service.title} 
@@ -174,11 +174,11 @@ const Home: React.FC = () => {
               <div className="mt-10 grid grid-cols-2 gap-6">
                   <div className="p-4 bg-slate-50 rounded-lg border border-slate-100">
                       <div className="font-bold text-aegis-navy text-3xl mb-1">100%</div>
-                      <div className="text-xs text-slate-500 uppercase tracking-wide">Qualified Staff</div>
+                      <div className="text-xs text-slate-500 uppercase tracking-wide">Prepared</div>
                   </div>
                    <div className="p-4 bg-slate-50 rounded-lg border border-slate-100">
-                      <div className="font-bold text-aegis-navy text-3xl mb-1">24h</div>
-                      <div className="text-xs text-slate-500 uppercase tracking-wide">Response Time</div>
+                      <div className="font-bold text-aegis-navy text-3xl mb-1">24/7</div>
+                      <div className="text-xs text-slate-500 uppercase tracking-wide">Availability</div>
                   </div>
               </div>
 
@@ -205,7 +205,7 @@ const Home: React.FC = () => {
                         <Star className="w-5 h-5 text-yellow-400 fill-current" />
                     </div>
                     <p className="text-slate-700 text-sm italic">
-                        "Aegis provided flawless medical cover for our festival. Professional, discreet, and incredibly capable."
+                        "Aegis came to our charity football tournament today, and handled all minor injuries perfectly. Unfortunately in the semi final there was an horrific injury. The team dealt with the issue amazingly and provided him with all the care needed"
                     </p>
                 </div>
             </div>
@@ -217,7 +217,7 @@ const Home: React.FC = () => {
       <section className="py-24 bg-aegis-navy relative overflow-hidden">
         {/* Background Patterns */}
         <div className="absolute inset-0 opacity-10">
-            <svg className="h-full w-full" viewBox="0 0 100 100" preserveAspectRatio="none">
+            <svg className="h-full w-full rotate-180 transform" viewBox="0 0 100 100" preserveAspectRatio="none">
                 <path d="M0 100 C 20 0 50 0 100 100 Z" fill="white" />
             </svg>
         </div>

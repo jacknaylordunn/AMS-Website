@@ -4,6 +4,7 @@ import Button from '../components/Button';
 
 const JoinUs: React.FC = () => {
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState('');
   const [formData, setFormData] = useState({
       firstName: '',
       lastName: '',
@@ -17,24 +18,23 @@ const JoinUs: React.FC = () => {
       setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError('');
     
-    const subject = `Job Application: ${formData.role} - ${formData.firstName} ${formData.lastName}`;
-    const body = `Application Details:
-
-Name: ${formData.firstName} ${formData.lastName}
-Email: ${formData.email}
-Role: ${formData.role}
-PIN (if applicable): ${formData.pin}
-
-Experience / Cover Letter:
-${formData.coverLetter}
-
-IMPORTANT: Please attach your CV to this email before sending.`;
-
-    window.location.href = `mailto:contact@aegismedicalsolutions.co.uk?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    setSubmitted(true);
+    try {
+        const formPayload = new FormData(e.target as HTMLFormElement);
+        
+        await fetch('/', {
+            method: 'POST',
+            body: formPayload,
+        });
+        
+        setSubmitted(true);
+    } catch (err) {
+        setError('Something went wrong. Please try again later.');
+        console.error('Submission error', err);
+    }
   };
 
   const vacancies = [
@@ -46,7 +46,7 @@ IMPORTANT: Please attach your CV to this email before sending.`;
   ];
 
   return (
-    <div className="pt-20 min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50">
       <div className="bg-aegis-navy py-16 text-center text-white relative overflow-hidden">
         <div className="absolute inset-0 bg-aegis-teal/10"></div>
         <div className="max-w-4xl mx-auto px-4 relative z-10">
@@ -121,18 +121,30 @@ IMPORTANT: Please attach your CV to this email before sending.`;
             {/* Application Form */}
             <div className="bg-white rounded-2xl shadow-xl p-8 border border-slate-100 h-fit sticky top-24">
                 {submitted ? (
-                    <div className="text-center py-16">
-                        <div className="mx-auto flex items-center justify-center h-20 w-20 rounded-full bg-aegis-teal/20 mb-6">
-                            <Briefcase className="h-10 w-10 text-aegis-teal" />
+                    <div className="text-center py-16 animate-fade-in">
+                        <div className="mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-green-50 mb-6 animate-fade-in-up">
+                            <CheckCircle className="h-12 w-12 text-green-500" />
                         </div>
-                        <h2 className="text-2xl font-bold text-aegis-navy mb-4">Email Drafted</h2>
-                        <p className="text-slate-600 mb-8">
-                            We have opened your email client with your application details. <strong>Please attach your CV</strong> to the email before sending it to us.
+                        <h2 className="text-3xl font-heading font-bold text-aegis-navy mb-4">Application Submitted</h2>
+                        <p className="text-slate-600 text-lg mb-8 leading-relaxed">
+                            Thanks for your interest in joining Aegis. Our recruitment team will review your details and contact you if your profile matches our current needs.
                         </p>
-                        <Button onClick={() => setSubmitted(false)} variant="outline">Start Over</Button>
+                        <Button onClick={() => setSubmitted(false)} variant="outline" className="min-w-[200px]">Back to Careers</Button>
                     </div>
                 ) : (
-                    <form onSubmit={handleSubmit} className="space-y-6">
+                    <form 
+                        name="join-us" 
+                        method="POST" 
+                        data-netlify="true" 
+                        netlify-honeypot="bot-field"
+                        onSubmit={handleSubmit} 
+                        className="space-y-6"
+                    >
+                        <input type="hidden" name="form-name" value="join-us" />
+                        <div className="hidden">
+                           <label>Don’t fill this out if you’re human: <input name="bot-field" /></label>
+                        </div>
+
                         <div className="border-b border-slate-100 pb-6 mb-6">
                             <h3 className="text-2xl font-bold text-aegis-navy">Staff Application</h3>
                             <p className="text-slate-500 text-sm mt-1">Apply for any of the positions listed.</p>
@@ -171,18 +183,25 @@ IMPORTANT: Please attach your CV to this email before sending.`;
                              <input name="pin" onChange={handleChange} value={formData.pin} type="text" className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:ring-2 focus:ring-aegis-teal transition" placeholder="e.g. PA12345" />
                         </div>
 
-                        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 text-sm text-blue-800 flex items-start">
-                            <Upload className="w-5 h-5 mr-2 flex-shrink-0" />
-                            <p><strong>Note:</strong> You will be prompted to attach your CV in your email client after clicking submit.</p>
-                        </div>
-
                         <div>
                             <label className="block text-sm font-bold text-slate-700 mb-1">Experience / Cover Letter</label>
                             <textarea name="coverLetter" onChange={handleChange} value={formData.coverLetter} rows={3} className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:ring-2 focus:ring-aegis-teal transition"></textarea>
                         </div>
+                        
+                        <div>
+                             <label className="block text-sm font-bold text-slate-700 mb-1">Upload CV (PDF/Word)</label>
+                             <input 
+                                type="file" 
+                                name="cv" 
+                                accept=".pdf,.doc,.docx"
+                                className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:ring-2 focus:ring-aegis-teal transition text-sm text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-aegis-teal/10 file:text-aegis-teal hover:file:bg-aegis-teal/20" 
+                             />
+                        </div>
+
+                        {error && <p className="text-red-500 text-sm font-bold">{error}</p>}
 
                         <Button type="submit" variant="primary" size="lg" className="w-full">
-                            Draft Application Email
+                            Submit Application
                         </Button>
                     </form>
                 )}

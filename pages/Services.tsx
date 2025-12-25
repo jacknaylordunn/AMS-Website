@@ -60,7 +60,7 @@ const Services: React.FC = () => {
   ];
 
   return (
-    <div className="pt-16 min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50">
       {/* Header */}
       <div className="bg-aegis-navy text-white py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-10"></div>
@@ -77,7 +77,7 @@ const Services: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="space-y-24">
           {detailedServices.map((service, index) => (
-            <div key={service.id} className={`flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-16 items-center`}>
+            <div key={service.id} id={service.id} className={`scroll-mt-28 flex flex-col ${index % 2 === 1 ? 'lg:flex-row-reverse' : 'lg:flex-row'} gap-16 items-center`}>
               
               {/* Image Side */}
               <div className="w-full lg:w-1/2">

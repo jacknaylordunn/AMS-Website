@@ -135,7 +135,7 @@ const Calculator: React.FC = () => {
   };
 
   return (
-    <div className="pt-20 min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50">
         <div className="bg-aegis-navy py-16 text-center text-white">
             <div className="max-w-4xl mx-auto px-4">
                 <h1 className="text-3xl md:text-5xl font-heading font-bold mb-4">Event Medical Calculator</h1>

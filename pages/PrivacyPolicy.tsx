@@ -5,7 +5,7 @@ import { COMPANY_INFO } from '../constants';
 
 const PrivacyPolicy: React.FC = () => {
   return (
-    <div className="pt-20 min-h-screen bg-slate-50">
+    <div className="min-h-screen bg-slate-50">
       {/* Header */}
       <div className="bg-aegis-navy text-white py-16 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-aegis-teal/10 rounded-full blur-3xl"></div>
