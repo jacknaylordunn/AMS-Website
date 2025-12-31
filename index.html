@@ -4,10 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aegis Medical Solutions | Professional Event Medical Cover</title>
+    <meta name="description" content="Aegis Medical Solutions provides expert event medical cover, clinical governance, and risk management for festivals, sports, and venues in Oxford and the UK.">
     <link rel="icon" type="image/png" href="https://145955222.fs1.hubspotusercontent-eu1.net/hubfs/145955222/AMS/Logo%20FINAL%20(2).png" />
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
@@ -25,6 +26,11 @@
                 light: '#f8fafc', // Slate 50
                 gray: '#cbd5e1', // Slate 300
               }
+            },
+            boxShadow: {
+              'soft': '0 4px 20px -2px rgba(0, 0, 0, 0.05)',
+              'card': '0 0 0 1px rgba(0,0,0,0.03), 0 2px 8px rgba(0,0,0,0.04)',
+              'glow': '0 0 20px rgba(13, 148, 136, 0.15)'
             },
             animation: {
               'fade-in-up': 'fadeInUp 0.8s ease-out',
@@ -47,6 +53,11 @@
     <style>
       html {
         scroll-behavior: smooth;
+        scroll-padding-top: 100px; /* Ensures sticky header doesn't cover anchor links */
+      }
+      body {
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
       }
       .font-heading {
         font-family: 'Montserrat', sans-serif;

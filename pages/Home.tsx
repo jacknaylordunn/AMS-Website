@@ -184,7 +184,7 @@ const Home: React.FC = () => {
 
               <div className="mt-10">
                   <Button to="/about" variant="primary">
-                    Meet The Leadership
+                    Learn More About Aegis
                   </Button>
               </div>
             </div>
